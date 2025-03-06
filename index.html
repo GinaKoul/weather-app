@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="weather-api.js"></script>
+    <script src="giphy-api.js"></script>
     <script src="main.js"></script>
   </head>
   <body>
-    <form action="">
-      <label for="weatherSearch">Enter city</label>
-      <input type="search" id="weatherSearch" />
-      <button type="button" id="getWeather">Show weather</button>
-    </form>
+    <header>
+      <h1>Weather App</h1>
+    </header>
+    <main>
+      <form action="">
+        <label for="weatherSearch">Search weather in city</label>
+        <input type="search" id="weatherSearch" />
+        <button type="button" id="getWeather">Search</button>
+      </form>
+      <article id="content"></article>
+    </main>
+    <footer>&copy Gina Kouliaki</footer>
   </body>
 </html>
