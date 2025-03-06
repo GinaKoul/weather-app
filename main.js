@@ -3,6 +3,16 @@
   let searchField;
   let searchButton;
 
+  function addLoader() {
+    const loader = doc.createElement("span");
+    loader.classList.add("loader");
+    mainContent.append(loader);
+  }
+
+  function removeLoader() {
+    mainContent.querySelector(".loader").remove();
+  }
+
   function createDataSection(data) {
     const articleSection = doc.createElement("section");
     const title = doc.createElement("h3");
@@ -38,8 +48,6 @@
   }
 
   async function renderData(data) {
-    mainContent.textContent = "";
-
     const title = doc.createElement("h2");
     title.textContent = data["resolvedAddress"];
 
@@ -53,6 +61,8 @@
       details.append(createDataSection(currentConditions[key]));
     }
 
+    removeLoader();
+
     mainContent.append(title, dateTime, details);
 
     const gif = document.createElement("img");
@@ -63,8 +73,11 @@
   async function handleSearch() {
     try {
       const searchValue = searchField.value;
-      if (!searchValue) return;
+      if (!searchValue || searchValue.trim() === "") return;
+      mainContent.textContent = "";
+      addLoader();
       const newData = await WeatherAPI.search(searchValue);
+      searchField.value = "";
       renderData(newData);
     } catch (error) {
       new Error(`Error status: ${error}`);
